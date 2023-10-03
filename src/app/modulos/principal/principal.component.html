@@ -1,0 +1,57 @@
+<div class="container">
+    <h1 class="my-4">{{title}}</h1>
+    <button class="btn btn-outline-secondary"  (click)="irAFavoritos()">Ir a Favoritos</button>
+    <div class="row">
+      <div class="col-8">
+        <label for="buscar">Buscar noticia:</label>
+        <div class="input-group mb-3">
+         
+          <input type="text" class="form-control"   [(ngModel)]="buscarNoticia">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="buscar()">Buscar</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <label for="orderBySelect">Ordenar por:</label>
+      <select id="orderBySelect"  (change)="buscar()" [(ngModel)]="ordernarPor" class="form-control">
+        <option value="+published_at">Más reciente</option>
+        <option value="-published_at">Más antigua</option> 
+      </select>
+      </div>
+   
+  
+    
+  
+    <div class="row">
+      <div class="col-md-4" *ngFor="let newsItem of listado | paginate: { itemsPerPage: 10, currentPage: paginaActual, totalItems: totalNoticias }">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="{{ newsItem.image_url }}" alt="{{ newsItem.title }}">
+          <div class="card-body">
+            <h2 class="card-title">{{ newsItem.title }}</h2>
+            <p class="card-text">{{ newsItem.summary }}</p>
+            <p class="card-text">
+              <small class="text-muted">Publicado {{ newsItem.published_at | date:'dd MMM yyyy' }}</small>
+            </p>
+            <button class="btn btn-primary" (click)="agregarAFavoritos(newsItem)">Agregar a Favoritos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="pagination-container">
+      <pagination-controls 
+        [(ngModel)]="paginaActual"
+        previousLabel="Anterior"
+                        nextLabel="Siguiente"
+        (pageChange)="cambiarPagina($event)"
+       
+        class="my-pagination">
+      </pagination-controls>
+    </div>
+  </div>
+  <div *ngIf="cargando" class="text-center" style="position: fixed;top: 0;left: 0;width: 100%;background: rgba(0,0,0,0.5); height: 100%;">
+    <p>Cargando noticias...</p>
+    <div class="spinner-border" role="status"> 
+    </div>
+  </div>

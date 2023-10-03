@@ -1,0 +1,41 @@
+/* Estilos para la tarjeta de noticias */
+.card {
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    margin-bottom: 1rem;
+  }
+  
+  /* Estilos para la paginación */
+  .my-pagination {
+    margin-top: 20px;
+  }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Alineación vertical y margen inferior */
+  .d-flex {
+    flex-direction: column;
+  }
+  
+  .d-flex > * {
+    margin-bottom: 0.5rem;
+  }
